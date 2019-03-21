@@ -1,0 +1,62 @@
+h1 D&D Right Here
+
+form action="" method="POST"
+    input type="text" name="Name" placeholder="Username"<br>
+    input type="password" name="Password" placeholder="Password"<br>
+    input type="submit" formaction="/login" Log in <br>
+    input type="submit" formaction="/createaccount" Create Account<br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/ -if session[:account]["logged_in"] != true
+/         form action="/login" method="POST"
+/                 input name="Username" placeholder="Username" type="text"
+/                 input name="Password" placeholder="Password" type="password"
+/                 input value="Log In" type="submit"
+
+/ -if session[:account]["logged_in"] == false
+/     p Username or password is incorrecto!
+
+/ -if session[:account]["logged_in"] != true
+/     p
+/         a href="/register" Create Account
+
+/ -if session[:account]["logged_in"] == true
+/         a href="/bloghome" Go to my blog
+/         p = "Currently logged in as #{session[:account]["Username"]}"
+
+/         form action="/log_out" method="POST"
+/                 input type="submit" value="Log Out"
