@@ -16,5 +16,5 @@ def login(username, password)
         redirect('/whoops')
     end
 
-    return user_id, password_db
+    return {"User_Id" => user_id, "Password" => password_db}
 end

@@ -30,13 +30,6 @@ post('/login') do
 
     redirect('/temp')
    
-#     if username_db[0] != nil && password_db[0] != nil
-#         username_db = username_db[0][0]
-#         password_db = password_db[0][0]
-#     else
-#         session[:account]["logged_in"] = false
-#         redirect("/")
-#     end    
 #     if username_db == username
 #         if BCrypt::Password.new(password_db) == password
 #             session[:account]["logged_in"] = true
