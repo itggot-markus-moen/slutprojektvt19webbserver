@@ -3,7 +3,7 @@
 # Projektplan
 
 ## 1. Projektbeskrivning
-En sida där man kan slumpa fram D&D-karaktärer. Man ska ha ett konto där man kan se sina egna karaktärer och man ska även kunna se andras karaktärer. 
+En sida där man kan slumpa fram D&D-karaktärer. Man ska ha ett konto där man kan se sina egna karaktärer och man ska även kunna se andras karaktärer. Man ska även kunna dela karaktärer med andra användare. 
 ## 2. Vyer (sidor)
   Hem - Startsidan för hemsidan. Det är här man loggar in eller gör sitt konto. 
   Mina sidor - Här får man se alla sina egna karaktärer. 
