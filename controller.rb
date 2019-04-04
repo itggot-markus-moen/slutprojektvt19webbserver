@@ -1,0 +1,62 @@
+require "sinatra"
+require "slim"
+require "sqlite3"
+require "bcrypt"
+require_relative "model.rb"
+
+enable :sessions
+
+get('/') do
+    slim(:index)
+end
+
+before do
+    if session[:account] == nil
+        session[:account] = {}
+    end
+    # if session[:account]["logged_in"] != true
+    #     redirect('/')
+    # end
+end
+
+get('/temp') do
+    slim(:temp)
+end
+
+get('/whoops') do
+    slim(:whoops)
+end
+
+get('/home') do
+    slim(:home)
+end
+
+post('/login') do
+    username = params["Username"]
+    password = params["Password"]
+
+    session[:account] = login(username, password)
+   
+    if session[:account]["Success"]
+        if BCrypt::Password.new(session[:account]["Password"]) == password
+            session[:account]["logged_in"] = true
+#             session[:account]["Username"] = username
+#             session[:account]["User_Id"] = db.execute("Select User_Id from Users WHERE Username = ?", username)
+            redirect("/home")
+        else
+            session[:account]["logged_in"] = false
+        end
+    else
+        session[:account]["logged_in"] = false
+    end
+    redirect("/")
+end
+
+post('/createaccount') do
+    username = params["Username"]
+    password = params["Password"]
+
+    createaccount(username, password)
+
+    redirect('/')
+end

@@ -6,7 +6,11 @@ form action="" method="POST"
     input type="submit" formaction="/login" Log in <br>
     input type="submit" formaction="/createaccount" Create Account<br>
 
+-if session[:account]["logged_in"] == false
+    p Something went wrong
 
+-if session[:account]["logged_in"]
+    p Hurray!
 
 
 
