@@ -28,3 +28,18 @@ def createaccount(username, password)
     
     db.execute("INSERT INTO Users(Username, Password) VALUES(?, ?)", username, secret_password)
 end
+
+def character(character_id)
+    db = SQLite3::Database.new('db/db.db')
+    db.results_as_hash = true
+
+    name = db.execute("SELECT Name FROM Characters WHERE Character_Id = ?", character_id)
+    clas = db.execute("Select Class FROM Classes INNER JOIN Characters ON Classes.Class_Id = Characters.Class_Id WHERE Character_Id = ?", character_id)
+    subclass = db.execute("Select Subclass FROM Subclasses INNER JOIN Characters ON Subclasses.Subclass_Id = Characters.Subclass_Id WHERE Character_Id = ?", character_id)
+    race = db.execute("Select Race FROM Races INNER JOIN Characters ON Races.Race_Id = Characters.Race_Id WHERE Character_Id = ?", character_id)
+    subrace = db.execute("Select Subrace FROM Subraces INNER JOIN Characters ON Subraces.Subrace_Id = Characters.Subrace_Id WHERE Character_Id = ?", character_id)
+    background = db.execute("Select Background FROM Backgrounds INNER JOIN Characters ON Backgrounds.Background_Id = Characters.Background_Id WHERE Character_Id = ?", character_id)
+
+    character = {"Name" => name, "Class" => clas, "Subclass" => subclass, "Subrace" => subrace, "Background" => background}
+    return character
+end
