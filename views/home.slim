@@ -1,1 +1,7 @@
-h1 HOME!
+h1 Your characters
+a href="/home" Back
+/ -users.each do |e|
+/     p = "#{e["name"]} #{e["email"]} #{e["tel"]} #{e["title"]}"
+    a href="/list/#{e["id"]}" See User
+
+h1 Other characters

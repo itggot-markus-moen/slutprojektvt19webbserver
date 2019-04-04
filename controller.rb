@@ -28,20 +28,21 @@ get('/whoops') do
 end
 
 get('/home') do
-    slim(:home)
+    names = list(session[:account][:login]["User_Id"])
+
+    slim(:home, locals:{names:names})
 end
 
 post('/login') do
     username = params["Username"]
     password = params["Password"]
 
-    session[:account] = login(username, password)
+    session[:account][:login] = login(username, password)
    
-    if session[:account]["Success"]
-        if BCrypt::Password.new(session[:account]["Password"]) == password
+    if session[:account][:login]["Success"]
+        if BCrypt::Password.new(session[:account][:login]["Password"]) == password
             session[:account]["logged_in"] = true
 #             session[:account]["Username"] = username
-#             session[:account]["User_Id"] = db.execute("Select User_Id from Users WHERE Username = ?", username)
             redirect("/home")
         else
             session[:account]["logged_in"] = false

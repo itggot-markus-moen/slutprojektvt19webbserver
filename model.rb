@@ -43,3 +43,10 @@ def character(character_id)
     character = {"Name" => name, "Class" => clas, "Subclass" => subclass, "Subrace" => subrace, "Background" => background}
     return character
 end
+
+def list(user_id)
+    db = SQLite3::Database.new('db/db.db')
+    db.results_as_hash = true
+    
+    output = db.execute("SELECT Name from Characters INNER JOIN Ownership ON Characters.Character_Id = Ownership.Character_Id WHERE User_Id = ?", user_id)
+end
