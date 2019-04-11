@@ -11,6 +11,8 @@ form action="" method="POST"
 
 -if session[:account]["logged_in"]
     p Hurray!
+    form action="/logout" method="POST"
+        input type="submit" Log Out
 
 
 

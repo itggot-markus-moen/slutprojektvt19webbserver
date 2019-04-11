@@ -1,7 +1,9 @@
 h1 Your characters
-a href="/home" Back
-/ -users.each do |e|
-/     p = "#{e["name"]} #{e["email"]} #{e["tel"]} #{e["title"]}"
-    a href="/list/#{e["id"]}" See User
+-names[0].each do |e|
+    p = "#{e["Name"]}"
+    a href="/view/#{e["Character_Id"]}" View Character
 
 h1 Other characters
+-names[1].each do |e|
+    p = "#{e["Name"]}"
+    a href="/view/#{e["Character_Id"]}" View Character

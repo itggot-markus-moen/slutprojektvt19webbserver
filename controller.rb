@@ -61,3 +61,14 @@ post('/createaccount') do
 
     redirect('/')
 end
+
+post('/logout') do
+    session[:account] = nil
+    redirect('/')
+end
+
+get('/view/:id') do
+    character = character(params["id"])
+
+    slim(:view, locals:{character:character})
+end
