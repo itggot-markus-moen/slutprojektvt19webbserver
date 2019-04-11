@@ -3,8 +3,8 @@ h1 D&D Right Here
 form action="" method="POST"
     input type="text" name="Username" placeholder="Username"<br>
     input type="password" name="Password" placeholder="Password"<br>
-    input type="submit" formaction="/login" Log in <br>
-    input type="submit" formaction="/createaccount" Create Account<br>
+    input type="submit" formaction="/login" value="Log in" <br>
+    input type="submit" formaction="/createaccount" value="Create Account" <br>
 
 -if session[:account]["logged_in"] == false
     p Username of password is wrong you pleb.
@@ -12,7 +12,7 @@ form action="" method="POST"
 -if session[:account]["logged_in"]
     p Hurray!
     form action="/logout" method="POST"
-        input type="submit" Log Out
+        input type="submit" value="Log Out"
 
 
 

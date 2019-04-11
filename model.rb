@@ -70,3 +70,21 @@ def list(user_id)
     not_your_characters = db.execute("SELECT Characters.Name, Characters.Character_Id from Characters INNER JOIN Ownership ON Characters.Character_Id = Ownership.Character_Id WHERE User_Id != ?", user_id)
     return your_characters, not_your_characters
 end
+
+def creation(name)
+    db = SQLite3::Database.new('db/db.db')
+    db.results_as_hash = true
+
+    clas = db.execute("SELECT * FROM Classes")
+    clas = clas[rand(clas.length)]
+    subclass = db.execute("SELECT * FROM Subclasses")
+    subclass = subclass[rand(subclass.length)]
+    race = db.execute("SELECT * FROM Races")
+    race = race[rand(race.length)]
+    subrace = db.execute("SELECT * FROM Subraces")
+    subrace = subrace[rand(subrace.length)]
+    background = db.execute("SELECT * FROM Backgrounds")
+    background = background[rand(background.length)]
+
+    db.execute("INSERT INTO Characters(Name, Class_Id, Subclass_Id, Race_Id, Subrace_Id, Background_Id) VALUES(?, ?, ?, ?, ?, ?)", name, )
+end

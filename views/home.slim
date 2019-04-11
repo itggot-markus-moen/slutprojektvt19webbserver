@@ -2,6 +2,10 @@ h1 Your characters
 -names[0].each do |e|
     p = "#{e["Name"]}"
     a href="/view/#{e["Character_Id"]}" View Character
+<br><br><br>
+form action="/creation" method="POST"
+    input type="text" name="Name" placeholder="Name"<br>
+    input type="submit" value="Create Character"
 
 h1 Other characters
 -names[1].each do |e|

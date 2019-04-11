@@ -72,3 +72,8 @@ get('/view/:id') do
 
     slim(:view, locals:{character:character})
 end
+
+post('/creation') do
+    creation(params["Name"])
+    redirect('/home')
+end
