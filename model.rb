@@ -34,13 +34,31 @@ def character(character_id)
     # db.results_as_hash = true
 
     name = db.execute("SELECT Name FROM Characters WHERE Character_Id = ?", character_id)
+    while name.kind_of?(Array)
+        name = name[0]
+    end
     clas = db.execute("Select Class FROM Classes INNER JOIN Characters ON Classes.Class_Id = Characters.Class_Id WHERE Character_Id = ?", character_id)
+    while clas.kind_of?(Array)
+        clas = clas[0]
+    end
     subclass = db.execute("Select Subclass FROM Subclasses INNER JOIN Characters ON Subclasses.Subclass_Id = Characters.Subclass_Id WHERE Character_Id = ?", character_id)
+    while subclass.kind_of?(Array)
+        subclass = subclass[0]
+    end
     race = db.execute("Select Race FROM Races INNER JOIN Characters ON Races.Race_Id = Characters.Race_Id WHERE Character_Id = ?", character_id)
+    while race.kind_of?(Array)
+        race = race[0]
+    end
     subrace = db.execute("Select Subrace FROM Subraces INNER JOIN Characters ON Subraces.Subrace_Id = Characters.Subrace_Id WHERE Character_Id = ?", character_id)
+    while subrace.kind_of?(Array)
+        subrace = subrace[0]
+    end
     background = db.execute("Select Background FROM Backgrounds INNER JOIN Characters ON Backgrounds.Background_Id = Characters.Background_Id WHERE Character_Id = ?", character_id)
+    while background.kind_of?(Array)
+        background = background[0]
+    end
 
-    character = {"Name" => name, "Class" => clas[0], "Subclass" => subclass[0], "Subrace" => subrace[0], "Background" => background[0]}
+    character = {"Name" => name, "Class" => clas, "Subclass" => subclass, "Race" => race, "Subrace" => subrace, "Background" => background}
     return character
 end
 
