@@ -77,14 +77,25 @@ def creation(name)
 
     clas = db.execute("SELECT * FROM Classes")
     clas = clas[rand(clas.length)]
-    subclass = db.execute("SELECT * FROM Subclasses")
+    subclass = db.execute("SELECT * FROM Subclasses WHERE Class_Id = ?", clas["Class_Id"])
     subclass = subclass[rand(subclass.length)]
     race = db.execute("SELECT * FROM Races")
     race = race[rand(race.length)]
-    subrace = db.execute("SELECT * FROM Subraces")
+    subrace = db.execute("SELECT * FROM Subraces WHERE Race_Id = ?", race["Race_Id"])
     subrace = subrace[rand(subrace.length)]
     background = db.execute("SELECT * FROM Backgrounds")
     background = background[rand(background.length)]
 
-    db.execute("INSERT INTO Characters(Name, Class_Id, Subclass_Id, Race_Id, Subrace_Id, Background_Id) VALUES(?, ?, ?, ?, ?, ?)", name, )
+    if subrace != nil
+        db.execute("INSERT INTO Characters(Name, Class_Id, Subclass_Id, Race_Id, Subrace_Id, Background_Id) VALUES(?, ?, ?, ?, ?, ?)", name, clas[0], subclass[0], race[0], subrace[0], background[0])
+    else
+        db.execute("INSERT INTO Characters(Name, Class_Id, Subclass_Id, Race_Id, Background_Id) VALUES(?, ?, ?, ?, ?)", name, clas[0], subclass[0], race[0], background[0])
+    end
+
+    character_id = db.execute("SELECT Character_Id FROM Characters WHERE Name = ?", name)
+    character_id = character_id[0][0]
+
+    db.execute("INSERT INTO Ownership(User_Id, Character_Id) VALUES(?, ?)", session[:account][:login]["User_Id"], character_id)
+
+    return character_id
 end

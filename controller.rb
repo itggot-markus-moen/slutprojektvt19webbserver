@@ -74,6 +74,6 @@ get('/view/:id') do
 end
 
 post('/creation') do
-    creation(params["Name"])
-    redirect('/home')
+    id = creation(params["Name"])
+    redirect("/view/#{id}")
 end
