@@ -2,7 +2,8 @@ h1 = "#{character["Name"]}"
 p = "Class: #{character["Class"]}"
 p = "Subclass: #{character["Subclass"]}"
 p = "Race: #{character["Race"]}"
-p = "Subrace: #{character["Subrace"]}"
+-if character["Subrace"] != nil
+    p = "Subrace: #{character["Subrace"]}"
 p = "Background: #{character["Background"]}"
 
 a href="/home" Back
