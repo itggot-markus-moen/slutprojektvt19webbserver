@@ -14,9 +14,9 @@ before do
     if session[:account] == nil
         session[:account] = {}
     end
-    # if session[:account]["logged_in"] != true
-    #     redirect('/')
-    # end
+    if session[:account]["logged_in"] != true && request.path_info != '/'
+        redirect('/')
+    end
 end
 
 get('/temp') do
