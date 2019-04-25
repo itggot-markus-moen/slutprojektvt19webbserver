@@ -9,7 +9,7 @@ form action="" method="POST"
 -if session[:account]["logged_in"] == false
     p Username of password is wrong you pleb.
 
--if session[:account][:occupied] == true
+-if session[:account][:username] == false
     p Username is already taken. 
 
 -if session[:account]["logged_in"]

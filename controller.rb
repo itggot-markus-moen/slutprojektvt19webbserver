@@ -51,11 +51,11 @@ post('/createaccount') do
     username = params["Username"]
     password = params["Password"]
     session[:account]["logged_in"] = nil
-    session[:account][:occupied] = nil
+    session[:account][:username] = nil
 
     success = createaccount(username, password)
     if success == false
-        session[:account][:occupied] = true
+        session[:account][:username] = false
     end
     
     redirect('/')
@@ -77,8 +77,14 @@ get('/view/:id') do
     slim(:view, locals:{character:character})
 end
 
+# FIX HERE!! still redirects to view/false and not home
 post('/creation') do
+    session[:account][:character_name] = nil
     id = creation(params["Name"])
+    if id = false
+        session[:account][:character_name] = false
+        redirect('/home')
+    end
     redirect("/view/#{id}")
 end
 

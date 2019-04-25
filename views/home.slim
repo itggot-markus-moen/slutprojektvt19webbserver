@@ -9,6 +9,8 @@ h1 Your characters
 form action="/creation" method="POST"
     input type="text" name="Name" placeholder="Name"<br>
     input type="submit" value="Create Character"
+-if session[:account][:character_name] == false
+    p = "Name is already taken."
 
 h1 Other characters
 -names[1].each do |e|

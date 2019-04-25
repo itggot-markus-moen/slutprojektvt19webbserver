@@ -79,6 +79,11 @@ def creation(name)
     db = SQLite3::Database.new('db/db.db')
     db.results_as_hash = true
 
+    taken = db.execute("SELECT Name FROM Characters WHERE Name = ?", name)
+    if taken.length != 0 || name.length == 0
+        return false
+    end
+
     clas = db.execute("SELECT * FROM Classes")
     clas = clas[rand(clas.length)]
     subclass = db.execute("SELECT * FROM Subclasses WHERE Class_Id = ?", clas["Class_Id"])
