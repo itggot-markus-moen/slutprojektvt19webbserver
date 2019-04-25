@@ -14,7 +14,7 @@ before do
     if session[:account] == nil
         session[:account] = {}
     end
-    if session[:account]["logged_in"] != true && request.path_info != '/'
+    if session[:account]["logged_in"] != true && request.path_info != '/' && request.path_info != '/login' && request.path_info != '/createaccount'
         redirect('/')
     end
 end
@@ -29,7 +29,6 @@ end
 
 get('/home') do
     names = list(session[:account][:login]["User_Id"])
-
     slim(:home, locals:{names:names})
 end
 
@@ -57,7 +56,7 @@ post('/createaccount') do
     password = params["Password"]
 
     createaccount(username, password)
-
+    session[:account]["logged_in"] = nil
     redirect('/')
 end
 
