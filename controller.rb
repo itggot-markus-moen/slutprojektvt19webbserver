@@ -69,6 +69,7 @@ end
 
 get('/view/:id') do
     character = character(params["id"])
+    character["Character_Id"] = params["id"]
 
     slim(:view, locals:{character:character})
 end
@@ -76,4 +77,9 @@ end
 post('/creation') do
     id = creation(params["Name"])
     redirect("/view/#{id}")
+end
+
+post('/share') do
+    share(params["Character_Id"], params["Username"])
+    redirect("/view/#{params["Character_Id"]}")
 end
