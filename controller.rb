@@ -42,7 +42,6 @@ post('/login') do
     if session[:account][:login]["Success"]
         if BCrypt::Password.new(session[:account][:login]["Password"]) == password
             session[:account]["logged_in"] = true
-#             session[:account]["Username"] = username
             redirect("/home")
         else
             session[:account]["logged_in"] = false
@@ -68,8 +67,12 @@ post('/logout') do
 end
 
 get('/view/:id') do
-    character = character(params["id"])
-    character["Character_Id"] = params["id"]
+    id = params["id"]
+    user_id = session[:account][:login]["User_Id"]
+    character = character(id)
+    character["Character_Id"] = id
+    ownership = ownership(user_id, id)
+    character["Ownership"] = ownership
 
     slim(:view, locals:{character:character})
 end
@@ -80,6 +83,7 @@ post('/creation') do
 end
 
 post('/share') do
-    share(params["Character_Id"], params["Username"])
-    redirect("/view/#{params["Character_Id"]}")
+    id = params["Character_Id"]
+    share(id, params["Username"])
+    redirect("/view/#{id}")
 end

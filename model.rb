@@ -103,7 +103,19 @@ end
 def share(id, username)
     db = SQLite3::Database.new('db/db.db')
     db.results_as_hash = true
+    
     user_id = db.execute("SELECT User_Id FROM Users WHERE Username = ?", username)
     user_id = user_id[0][0]
     db.execute("INSERT INTO Ownership(User_Id, Character_Id) VALUES(?, ?)", id, user_id)
+end
+
+def ownership(user_id, character_id)
+    db = SQLite3::Database.new('db/db.db')
+
+    output = false
+    owners = db.execute("SELECT User_Id FROM Ownership WHERE Character_Id = ?", character_id)
+    if owners.include?([user_id])
+        output = true
+    end
+    return output
 end
