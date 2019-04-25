@@ -19,10 +19,6 @@ before do
     end
 end
 
-get('/temp') do
-    slim(:temp)
-end
-
 get('/whoops') do
     slim(:whoops)
 end
@@ -54,9 +50,14 @@ end
 post('/createaccount') do
     username = params["Username"]
     password = params["Password"]
-
-    createaccount(username, password)
     session[:account]["logged_in"] = nil
+    session[:account][:occupied] = nil
+
+    success = createaccount(username, password)
+    if success == false
+        session[:account][:occupied] = true
+    end
+    
     redirect('/')
 end
 

@@ -24,8 +24,12 @@ def createaccount(username, password)
     db = SQLite3::Database.new('db/db.db')
     db.results_as_hash = true
     
+    taken = db.execute("SELECT Username FROM Users WHERE Username = ?", username)
+    if taken.length != 0 || username.length == 0
+        return false
+    end
+
     secret_password = BCrypt::Password.create(password)
-    
     db.execute("INSERT INTO Users(Username, Password) VALUES(?, ?)", username, secret_password)
 end
 
