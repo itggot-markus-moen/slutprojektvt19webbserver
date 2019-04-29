@@ -7,10 +7,14 @@ p = "Race: #{character["Race"]}"
 p = "Background: #{character["Background"]}"
 
 -if character["Ownership"] == true
-    form action="/share" method="POST"
-        input type="hidden" name="Character_Id" value="#{character["Character_Id"]}"
-        input type="text" name="Username" placeholder="Username"
-        input type="submit" value="Share Character"
+        form action="/share" method="POST"
+                input type="hidden" name="Character_Id" value="#{character["Character_Id"]}"
+                input type="text" name="Username" placeholder="Username"
+                input type="submit" value="Share Character"
+
+        form action="/delete" method="POST"
+                input type="hidden" name="Character_Id" value="#{character["Character_Id"]}"
+                input type="submit" value="Delete Character"
 
 -if session[:account][:share] == false
         p User does not exist. 

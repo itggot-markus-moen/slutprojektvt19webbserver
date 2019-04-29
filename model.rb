@@ -132,3 +132,9 @@ def ownership(user_id, character_id)
     end
     return output
 end
+
+def delete(id)
+    db = SQLite3::Database.new('db/db.db')
+    db.execute("DELETE FROM Characters WHERE Character_Id = ?", id)
+    db.execute("DELETE FROM Ownership WHERE Character_Id = ?", id)
+end

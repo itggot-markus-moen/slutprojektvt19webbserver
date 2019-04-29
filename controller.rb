@@ -97,3 +97,8 @@ post('/share') do
     end
     redirect("/view/#{id}")
 end
+
+post('/delete') do
+    delete(params["Character_Id"])
+    redirect('/home')
+end
