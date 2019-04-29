@@ -89,7 +89,11 @@ post('/creation') do
 end
 
 post('/share') do
+    session[:account][:share] = nil
     id = params["Character_Id"]
-    share(id, params["Username"])
+    result = share(id, params["Username"])
+    if result == false
+        session[:account][:share] = false
+    end
     redirect("/view/#{id}")
 end

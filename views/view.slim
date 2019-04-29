@@ -11,4 +11,7 @@ p = "Background: #{character["Background"]}"
         input type="hidden" name="Character_Id" value="#{character["Character_Id"]}"
         input type="text" name="Username" placeholder="Username"
         input type="submit" value="Share Character"
+
+-if session[:account][:share] == false
+        p User does not exist. 
 a href="/home" Back

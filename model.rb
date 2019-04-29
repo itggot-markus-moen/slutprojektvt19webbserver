@@ -115,6 +115,9 @@ def share(id, username)
     db.results_as_hash = true
     
     user_id = db.execute("SELECT User_Id FROM Users WHERE Username = ?", username)
+    if user_id == []
+        return false
+    end
     user_id = user_id[0][0]
     db.execute("INSERT INTO Ownership(User_Id, Character_Id) VALUES(?, ?)", id, user_id)
 end
