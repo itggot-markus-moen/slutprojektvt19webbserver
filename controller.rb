@@ -99,6 +99,7 @@ post('/share') do
 end
 
 post('/delete') do
-    delete(params["Character_Id"])
+    user_id = session[:account][:login]["User_Id"]
+    delete(params["Character_Id"], user_id)
     redirect('/home')
 end
