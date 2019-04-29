@@ -77,11 +77,11 @@ get('/view/:id') do
     slim(:view, locals:{character:character})
 end
 
-# FIX HERE!! still redirects to view/false and not home
 post('/creation') do
     session[:account][:character_name] = nil
     id = creation(params["Name"])
-    if id = false
+
+    if id == false
         session[:account][:character_name] = false
         redirect('/home')
     end

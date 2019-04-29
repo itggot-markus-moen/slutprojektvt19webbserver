@@ -2,6 +2,7 @@ require "sinatra"
 require "slim"
 require "sqlite3"
 require "bcrypt"
+require 'byebug'
 
 def login(username, password)
     db = SQLite3::Database.new('db/db.db')
@@ -80,7 +81,7 @@ def creation(name)
     db.results_as_hash = true
 
     taken = db.execute("SELECT Name FROM Characters WHERE Name = ?", name)
-    if taken.length != 0 || name.length == 0
+    if taken.length != 0 or name.length == 0
         return false
     end
 
