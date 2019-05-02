@@ -128,11 +128,7 @@ def creation(character_hash)
         return false
     end
 
-    # if character_hash["Subrace"] != nil
-        db.execute("INSERT INTO Characters(Name, Class_Id, Subclass_Id, Race_Id, Subrace_Id, Background_Id, Strength, Dexterity, Constitution, Intelligence, Wisdom, Charisma) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", character_hash["Name"], character_hash["Class"], character_hash["Subclass"], character_hash["Race"], character_hash["Subrace"], character_hash["Background"], character_hash["Strength"], character_hash["Dexterity"], character_hash["Constitution"], character_hash["Intelligence"], character_hash["Wisdom"], character_hash["Charisma"])
-    # else
-    #     db.execute("INSERT INTO Characters(Name, Class_Id, Subclass_Id, Race_Id, Background_Id) VALUES(?, ?, ?, ?, ?)", character_hash["Name"], character_hash["Class"], character_hash["Race"], character_hash["Subrace"], character_hash["Background"])
-    # end
+    db.execute("INSERT INTO Characters(Name, Class_Id, Subclass_Id, Race_Id, Subrace_Id, Background_Id, Strength, Dexterity, Constitution, Intelligence, Wisdom, Charisma) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", character_hash["Name"], character_hash["Class"], character_hash["Subclass"], character_hash["Race"], character_hash["Subrace"], character_hash["Background"], character_hash["Strength"], character_hash["Dexterity"], character_hash["Constitution"], character_hash["Intelligence"], character_hash["Wisdom"], character_hash["Charisma"])
 
     character_id = db.execute("SELECT Character_Id FROM Characters WHERE Name = ?", character_hash["Name"])
     character_id = character_id[0][0]
