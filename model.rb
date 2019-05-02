@@ -76,33 +76,44 @@ def list(user_id)
     return your_characters, not_your_characters
 end
 
-def creation(name)
+def generator(name)
+    db = SQLite3::Database.new('db/db.db')
+    db.results_as_hash = true
+    
+    clas = db.execute("SELECT * FROM Classes")
+    clas = clas[rand(clas.length)][0]
+    subclass = db.execute("SELECT * FROM Subclasses WHERE Class_Id = ?", clas)
+    subclass = subclass[rand(subclass.length)][0]
+    race = db.execute("SELECT * FROM Races")
+    race = race[rand(race.length)][0]
+    subrace = db.execute("SELECT * FROM Subraces WHERE Race_Id = ?", race)
+    subrace = subrace[rand(subrace.length)]
+    if subrace != nil
+        subrace = subrace[0]
+    end
+    background = db.execute("SELECT * FROM Backgrounds")
+    background = background[rand(background.length)][0]
+
+    character = {"Name" => name, "Class" => clas, "Subclass" => subclass, "Race" => race, "Subrace" => subrace, "Background" => background}
+    return character
+end
+
+def creation(character_hash)
     db = SQLite3::Database.new('db/db.db')
     db.results_as_hash = true
 
-    taken = db.execute("SELECT Name FROM Characters WHERE Name = ?", name)
-    if taken.length != 0 or name.length == 0
+    taken = db.execute("SELECT Name FROM Characters WHERE Name = ?", character_hash["Name"])
+    if taken.length != 0 or character_hash["Name"].length == 0
         return false
     end
 
-    clas = db.execute("SELECT * FROM Classes")
-    clas = clas[rand(clas.length)]
-    subclass = db.execute("SELECT * FROM Subclasses WHERE Class_Id = ?", clas["Class_Id"])
-    subclass = subclass[rand(subclass.length)]
-    race = db.execute("SELECT * FROM Races")
-    race = race[rand(race.length)]
-    subrace = db.execute("SELECT * FROM Subraces WHERE Race_Id = ?", race["Race_Id"])
-    subrace = subrace[rand(subrace.length)]
-    background = db.execute("SELECT * FROM Backgrounds")
-    background = background[rand(background.length)]
-
-    if subrace != nil
-        db.execute("INSERT INTO Characters(Name, Class_Id, Subclass_Id, Race_Id, Subrace_Id, Background_Id) VALUES(?, ?, ?, ?, ?, ?)", name, clas[0], subclass[0], race[0], subrace[0], background[0])
+    if character_hash["Subrace"] != nil
+        db.execute("INSERT INTO Characters(Name, Class_Id, Subclass_Id, Race_Id, Subrace_Id, Background_Id) VALUES(?, ?, ?, ?, ?, ?)", character_hash["Name"], character_hash["Class"], character_hash["Subclass"], character_hash["Race"], character_hash["Subrace"], character_hash["Background"])
     else
-        db.execute("INSERT INTO Characters(Name, Class_Id, Subclass_Id, Race_Id, Background_Id) VALUES(?, ?, ?, ?, ?)", name, clas[0], subclass[0], race[0], background[0])
+        db.execute("INSERT INTO Characters(Name, Class_Id, Subclass_Id, Race_Id, Background_Id) VALUES(?, ?, ?, ?, ?)", character_hash["Name"], character_hash["Class"], character_hash["Race"], character_hash["Subrace"], character_hash["Background"])
     end
 
-    character_id = db.execute("SELECT Character_Id FROM Characters WHERE Name = ?", name)
+    character_id = db.execute("SELECT Character_Id FROM Characters WHERE Name = ?", character_hash["Name"])
     character_id = character_id[0][0]
 
     db.execute("INSERT INTO Ownership(User_Id, Character_Id) VALUES(?, ?)", session[:account][:login]["User_Id"], character_id)
@@ -137,10 +148,15 @@ def delete(character_id, user_id)
     db = SQLite3::Database.new('db/db.db')
     db.results_as_hash = true
 
-    ownership = db.execute("SELECT * FROM Ownership WHERE User_Id = ? AND Character_Id = ?", user_id, character_id)
-
-    if ownership[0] != nil
+    if ownership(user_id, character_id)
         db.execute("DELETE FROM Characters WHERE Character_Id = ?", character_id)
         db.execute("DELETE FROM Ownership WHERE Character_Id = ?", character_id)
     end
+end
+
+def recreate(character_hash, character_id)
+    db = SQLite3::Database.new('db/db.db')
+    db.results_as_hash = true
+
+    db.execute("UPDATE Characters SET Class_Id = ?, Subclass_Id = ?, Race_Id = ?, Subrace_Id = ?, Background_Id = ? WHERE Character_Id = ?", character_hash["Class"], character_hash["Subclass"], character_hash["Race"], character_hash["Subrace"], character_hash["Background"], character_id)
 end

@@ -7,6 +7,10 @@ p = "Race: #{character["Race"]}"
 p = "Background: #{character["Background"]}"
 
 -if character["Ownership"] == true
+        form action="/recreate" method="POST"
+                input type="hidden" name="Character_Id" value="#{character["Character_Id"]}"
+                input type="submit" value="Retry"
+
         form action="/share" method="POST"
                 input type="hidden" name="Character_Id" value="#{character["Character_Id"]}"
                 input type="text" name="Username" placeholder="Username"

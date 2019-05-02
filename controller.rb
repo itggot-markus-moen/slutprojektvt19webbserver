@@ -79,7 +79,7 @@ end
 
 post('/creation') do
     session[:account][:character_name] = nil
-    id = creation(params["Name"])
+    id = creation(generator(params["Name"]))
 
     if id == false
         session[:account][:character_name] = false
@@ -102,4 +102,9 @@ post('/delete') do
     user_id = session[:account][:login]["User_Id"]
     delete(params["Character_Id"], user_id)
     redirect('/home')
+end
+
+post('/recreate') do
+    recreate(generator(nil), params["Character_Id"])
+    redirect("/view/#{params["Character_Id"]}")
 end
