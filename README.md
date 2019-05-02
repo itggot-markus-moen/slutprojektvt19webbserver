@@ -11,6 +11,18 @@ En sida där man kan slumpa fram D&D-karaktärer. Man ska ha ett konto där man 
   
   Se specifik karaktär - Här kan man se en karaktär i mer detalj. Man kan antingen se en av sina egna eller en som tillhör en annan person. Om man ser en som man har äganedrätt till karaktären så kan man göra om den, dela den med en annnan användare och radera den. 
 ## 3. Funktionalitet (med sekvensdiagram)
+<!-- TODO: alla diagram -->
+  Inloggning - Man kan skriva in ett användarnamn och ett löseond och välja om man vill logga in eller om man vill göra ett konto. Om man väljer att göra ett konto så kontrollerar servern att användarnamnet är unikt och om det är det så läggs uppgifterna in i databasen. Om man väljer att logga in kontrollerar servern att lösenordet stämmer med användarnamnet. Om det inte stämmer så får man ett felmeddelande. Om det stämmer så loggas man in och skickas vidare till hemsidan. 
+
+  Karaktärs listning - Alla karaktärer kan listas upp och de är sorterade i de som personen som är inloggad äger och de som personen inte äger. 
+
+  Skapa en karaktär - Man kan slumpa karaktärer. Man skriver in ett namn och resten får man slumpat. Denna karaktär listat bland alla andra karaktärer. När karaktären är skapad så kan man även välja att slumpa om den. Den har då samma namn men resten slumpas om. 
+
+  Visa karaktär - Man kan gå in på alla karaktärer, även de som man inte äger, och se mer detaljer om dem. 
+
+  Radera karaktär - Om man har äganderätt så kan man radera en karaktär. 
+
+  Dela karaktär - Om man har äganderätt så kan man dela en karaktär med en annan användare. De kan då också slumpa om och radera karaktären. 
 ## 4. Arkitektur (Beskriv filer och mappar)
   db - mappen för databasen
   db.db - själva databasen. 
@@ -30,3 +42,11 @@ En sida där man kan slumpa fram D&D-karaktärer. Man ska ha ett konto där man 
   model.rb - det här är filen som används för funktioner, som främst kommunicerar med databasen. 
 
 ## 5. (Databas med ER-diagram)
+  Classes - Listar alla klasser. 
+  Subclasses - Listar alla subclasser och klassen som de tillhör. 
+  Races - Listar alla raser. 
+  Subraces - Listar alla subraser och raserna som de tillhör. 
+  Backgrounds - Listar alla bakgrunder. 
+  Users - Innehåller användarnamn och krypterade lösenord. 
+  Characters - Listar karaktärers namn, klass, subklass, ras, subras, bakgrund, och ability scores. 
+  Ownership - Används för "många till många"-relationen av användare och karaktärer. 
