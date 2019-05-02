@@ -19,10 +19,6 @@ before do
     end
 end
 
-get('/whoops') do
-    slim(:whoops)
-end
-
 get('/home') do
     names = list(session[:account][:login]["User_Id"])
     slim(:home, locals:{names:names})

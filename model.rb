@@ -137,7 +137,7 @@ def creation(character_hash)
 
     return character_id
 end
-
+#TODO: Gör så att man inte kan dela med sig själv.
 def share(id, username)
     db = SQLite3::Database.new('db/db.db')
     db.results_as_hash = true
@@ -147,7 +147,7 @@ def share(id, username)
         return false
     end
     user_id = user_id[0][0]
-    db.execute("INSERT INTO Ownership(User_Id, Character_Id) VALUES(?, ?)", id, user_id)
+    db.execute("INSERT INTO Ownership(User_Id, Character_Id) VALUES(?, ?)", user_id, id)
 end
 
 def ownership(user_id, character_id)

@@ -7,7 +7,7 @@ form action="" method="POST"
     input type="submit" formaction="/createaccount" value="Create Account" <br>
 
 -if session[:account]["logged_in"] == false
-    p Username of password is wrong you pleb.
+    p Username or password is wrong you pleb.
 
 -if session[:account][:username] == false
     p Username is already taken. 
