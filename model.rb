@@ -62,8 +62,11 @@ def character(character_id)
     while background.kind_of?(Array)
         background = background[0]
     end
+    ability_scores = db.execute("SELECT Strength, Dexterity, Constitution, Intelligence, Wisdom, Charisma FROM Characters WHERE Character_Id = ?", character_id)
+    ability_scores = ability_scores[0]
 
-    character = {"Name" => name, "Class" => clas, "Subclass" => subclass, "Race" => race, "Subrace" => subrace, "Background" => background}
+    # character = {"Name" => name, "Class" => clas, "Subclass" => subclass, "Race" => race, "Subrace" => subrace, "Background" => background}
+    character = {"Name" => name, "Class" => clas, "Subclass" => subclass, "Race" => race, "Subrace" => subrace, "Background" => background, "Strength" => ability_scores[0], "Dexterity" => ability_scores[1], "Constitution" => ability_scores[2], "Intelligence" => ability_scores[3], "Wisdom" => ability_scores[4], "Charisma" => ability_scores[5]}
     return character
 end
 
@@ -74,6 +77,24 @@ def list(user_id)
     your_characters = db.execute("SELECT Characters.Name, Characters.Character_Id from Characters INNER JOIN Ownership ON Characters.Character_Id = Ownership.Character_Id WHERE User_Id = ?", user_id)
     not_your_characters = db.execute("SELECT Characters.Name, Characters.Character_Id from Characters INNER JOIN Ownership ON Characters.Character_Id = Ownership.Character_Id WHERE User_Id != ?", user_id)
     return your_characters, not_your_characters
+end
+
+def roller
+    d1 = rand(6)+1
+    d2 = rand(6)+1
+    d3 = rand(6)+1
+    d4 = rand(6)+1
+    arr =[d1, d2, d3, d4]
+    i = 1
+    min = arr[0]
+    while i < arr.length
+        if min > arr[i]
+            min = arr[i]
+        end
+        i += 1
+    end
+    ability = (d1 + d2 + d3 + d4 - min)
+    return ability
 end
 
 def generator(name)
@@ -94,7 +115,7 @@ def generator(name)
     background = db.execute("SELECT * FROM Backgrounds")
     background = background[rand(background.length)][0]
 
-    character = {"Name" => name, "Class" => clas, "Subclass" => subclass, "Race" => race, "Subrace" => subrace, "Background" => background}
+    character = {"Name" => name, "Class" => clas, "Subclass" => subclass, "Race" => race, "Subrace" => subrace, "Background" => background, "Strength" => roller(), "Dexterity" => roller(), "Constitution" => roller(), "Intelligence" => roller(), "Wisdom" => roller(), "Charisma" => roller()}
     return character
 end
 
@@ -107,11 +128,11 @@ def creation(character_hash)
         return false
     end
 
-    if character_hash["Subrace"] != nil
-        db.execute("INSERT INTO Characters(Name, Class_Id, Subclass_Id, Race_Id, Subrace_Id, Background_Id) VALUES(?, ?, ?, ?, ?, ?)", character_hash["Name"], character_hash["Class"], character_hash["Subclass"], character_hash["Race"], character_hash["Subrace"], character_hash["Background"])
-    else
-        db.execute("INSERT INTO Characters(Name, Class_Id, Subclass_Id, Race_Id, Background_Id) VALUES(?, ?, ?, ?, ?)", character_hash["Name"], character_hash["Class"], character_hash["Race"], character_hash["Subrace"], character_hash["Background"])
-    end
+    # if character_hash["Subrace"] != nil
+        db.execute("INSERT INTO Characters(Name, Class_Id, Subclass_Id, Race_Id, Subrace_Id, Background_Id, Strength, Dexterity, Constitution, Intelligence, Wisdom, Charisma) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", character_hash["Name"], character_hash["Class"], character_hash["Subclass"], character_hash["Race"], character_hash["Subrace"], character_hash["Background"], character_hash["Strength"], character_hash["Dexterity"], character_hash["Constitution"], character_hash["Intelligence"], character_hash["Wisdom"], character_hash["Charisma"])
+    # else
+    #     db.execute("INSERT INTO Characters(Name, Class_Id, Subclass_Id, Race_Id, Background_Id) VALUES(?, ?, ?, ?, ?)", character_hash["Name"], character_hash["Class"], character_hash["Race"], character_hash["Subrace"], character_hash["Background"])
+    # end
 
     character_id = db.execute("SELECT Character_Id FROM Characters WHERE Name = ?", character_hash["Name"])
     character_id = character_id[0][0]
@@ -158,5 +179,5 @@ def recreate(character_hash, character_id)
     db = SQLite3::Database.new('db/db.db')
     db.results_as_hash = true
 
-    db.execute("UPDATE Characters SET Class_Id = ?, Subclass_Id = ?, Race_Id = ?, Subrace_Id = ?, Background_Id = ? WHERE Character_Id = ?", character_hash["Class"], character_hash["Subclass"], character_hash["Race"], character_hash["Subrace"], character_hash["Background"], character_id)
+    db.execute("UPDATE Characters SET Class_Id = ?, Subclass_Id = ?, Race_Id = ?, Subrace_Id = ?, Background_Id = ?, Strength = ?, Dexterity = ?, Constitution = ?, Intelligence = ?, Wisdom = ?, Charisma = ? WHERE Character_Id = ?", character_hash["Class"], character_hash["Subclass"], character_hash["Race"], character_hash["Subrace"], character_hash["Background"], character_hash["Strength"], character_hash["Dexterity"], character_hash["Constitution"], character_hash["Intelligence"], character_hash["Wisdom"], character_hash["Charisma"], character_id)
 end

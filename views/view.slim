@@ -5,6 +5,12 @@ p = "Race: #{character["Race"]}"
 -if character["Subrace"] != nil
     p = "Subrace: #{character["Subrace"]}"
 p = "Background: #{character["Background"]}"
+p = "Strength: #{character["Strength"]}"
+p = "Dexterity: #{character["Dexterity"]}"
+p = "Constitution: #{character["Constitution"]}"
+p = "Intelligence: #{character["Intelligence"]}"
+p = "Wisdom: #{character["Wisdom"]}"
+p = "Charisma: #{character["Charisma"]}"
 
 -if character["Ownership"] == true
         form action="/recreate" method="POST"
