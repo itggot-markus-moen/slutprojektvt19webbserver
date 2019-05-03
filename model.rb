@@ -36,7 +36,6 @@ end
 
 def character(character_id)
     db = SQLite3::Database.new('db/db.db')
-    # db.results_as_hash = true
 
     name = db.execute("SELECT Name FROM Characters WHERE Character_Id = ?", character_id)
     while name.kind_of?(Array)
@@ -65,7 +64,6 @@ def character(character_id)
     ability_scores = db.execute("SELECT Strength, Dexterity, Constitution, Intelligence, Wisdom, Charisma FROM Characters WHERE Character_Id = ?", character_id)
     ability_scores = ability_scores[0]
 
-    # character = {"Name" => name, "Class" => clas, "Subclass" => subclass, "Race" => race, "Subrace" => subrace, "Background" => background}
     character = {"Name" => name, "Class" => clas, "Subclass" => subclass, "Race" => race, "Subrace" => subrace, "Background" => background, "Strength" => ability_scores[0], "Dexterity" => ability_scores[1], "Constitution" => ability_scores[2], "Intelligence" => ability_scores[3], "Wisdom" => ability_scores[4], "Charisma" => ability_scores[5]}
     return character
 end
@@ -137,7 +135,7 @@ def creation(character_hash)
 
     return character_id
 end
-#TODO: Gör så att man inte kan dela med sig själv.
+
 def share(id, username)
     db = SQLite3::Database.new('db/db.db')
     db.results_as_hash = true

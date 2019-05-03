@@ -14,7 +14,6 @@ Startsidan för hemsidan. Det är här man loggar in eller gör sitt konto.
 ### Se specifik karaktär
   Här kan man se en karaktär i mer detalj. Man kan antingen se en av sina egna eller en som tillhör en annan person. Om man ser en som man har äganedrätt till karaktären så kan man göra om den, dela den med en annnan användare och radera den. 
 ## 3. Funktionalitet (med sekvensdiagram)
-<!-- TODO: alla diagram -->
 ### Inloggning
 ![Sekvens-Login](https://github.com/itggot-markus-moen/slutprojektvt19webbserver/blob/master/misc/login.JPG)
   Man kan skriva in ett användarnamn och ett löseond och välja om man vill logga in eller om man vill göra ett konto. Om man väljer att göra ett konto så kontrollerar servern att användarnamnet är unikt och om det är det så läggs uppgifterna in i databasen. Om man väljer att logga in kontrollerar servern att lösenordet stämmer med användarnamnet. Om det inte stämmer så får man ett felmeddelande. Om det stämmer så loggas man in och skickas vidare till hemsidan. 
