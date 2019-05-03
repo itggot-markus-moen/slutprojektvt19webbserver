@@ -147,6 +147,10 @@ def share(id, username)
         return false
     end
     user_id = user_id[0][0]
+    self_share = db.execute("SELECT * FROM Ownership WHERE User_Id = ? AND Character_Id = ?", user_id, id)
+    if self_share != []
+        return false
+    end
     db.execute("INSERT INTO Ownership(User_Id, Character_Id) VALUES(?, ?)", user_id, id)
 end
 

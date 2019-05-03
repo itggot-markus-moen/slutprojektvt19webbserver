@@ -16,14 +16,14 @@ Startsidan för hemsidan. Det är här man loggar in eller gör sitt konto.
 ## 3. Funktionalitet (med sekvensdiagram)
 <!-- TODO: alla diagram -->
 ### Inloggning
-![Sekvens-Login](https://github.com/itggot-markus-moen/slutprojektvt19webbserver/tree/master/misc/Sekvens-Login.jpg)
+![Sekvens-Login](https://github.com/itggot-markus-moen/slutprojektvt19webbserver/tree/master/misc/login.jpg)
   Man kan skriva in ett användarnamn och ett löseond och välja om man vill logga in eller om man vill göra ett konto. Om man väljer att göra ett konto så kontrollerar servern att användarnamnet är unikt och om det är det så läggs uppgifterna in i databasen. Om man väljer att logga in kontrollerar servern att lösenordet stämmer med användarnamnet. Om det inte stämmer så får man ett felmeddelande. Om det stämmer så loggas man in och skickas vidare till hemsidan. 
 
 ###Karaktärslistning
   Alla karaktärer kan listas upp och de är sorterade i de som personen som är inloggad äger och de som personen inte äger. 
 
 ### Skapa en karaktär
-![Sekvens-Skapande](https://github.com/itggot-markus-moen/slutprojektvt19webbserver/tree/master/misc/Sekvens-Skapande.jpg)
+![Sekvens-Skapande](https://github.com/itggot-markus-moen/slutprojektvt19webbserver/tree/master/misc/skapande.jpg)
   Man kan slumpa karaktärer. Man skriver in ett namn och resten får man slumpat. Denna karaktär listat bland alla andra karaktärer. När karaktären är skapad så kan man även välja att slumpa om den. Den har då samma namn men resten slumpas om. 
 
 ###Visa karaktär
@@ -61,4 +61,4 @@ Startsidan för hemsidan. Det är här man loggar in eller gör sitt konto.
   Users - Innehåller användarnamn och krypterade lösenord. 
   Characters - Listar karaktärers namn, klass, subklass, ras, subras, bakgrund, och ability scores. 
   Ownership - Används för "många till många"-relationen av användare och karaktärer. 
-![ER-diagram](https://github.com/itggot-markus-moen/slutprojektvt19webbserver/tree/master/misc/ER-diagram.jpg)
+![ER-diagram](https://github.com/itggot-markus-moen/slutprojektvt19webbserver/tree/master/misc/er.jpg)
