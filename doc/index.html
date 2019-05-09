@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  File: README
+  
+    &mdash; Documentation by YARD 0.9.19
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  pathId = "README";
+  relpath = '';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/custom.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="_index.html">Index</a> &raquo; 
+    <span class="title">File: README</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><div id='filecontents'>
+<h1 id="label-slutprojektvt19webbserver">slutprojektvt19webbserver</h1>
+
+<h1 id="label-Projektplan">Projektplan</h1>
+
+<h2 id="label-1.+Projektbeskrivning">1. Projektbeskrivning</h2>
+
+<p>En sida där man kan slumpa fram D&amp;D-karaktärer. Man ska ha ett konto
+där man kan se sina egna karaktärer och man ska även kunna se andras
+karaktärer. Man ska även kunna dela karaktärer med andra användare.</p>
+
+<h2 id="label-2.+Vyer+-28sidor-29">2. Vyer (sidor)</h2>
+
+<h3 id="label-Start">Start</h3>
+
+<p>Startsidan för hemsidan. Det är här man loggar in eller gör sitt konto.</p>
+
+<h3 id="label-Hem">Hem</h3>
+
+<p>Här får man se alla sina egna karaktärer och även andras karaktärer. Det är
+också här man kan göra sin karaktär.</p>
+
+<h3 id="label-Se+specifik+karakt-C3-A4r">Se specifik karaktär</h3>
+
+<p>Här kan man se en karaktär i mer detalj. Man kan antingen se en av sina
+egna eller en som tillhör en annan person. Om man ser en som man har
+äganedrätt till karaktären så kan man göra om den, dela den med en annnan
+användare och radera den.</p>
+
+<h2 id="label-3.+Funktionalitet+-28med+sekvensdiagram-29">3. Funktionalitet (med sekvensdiagram)</h2>
+
+<h3 id="label-Inloggning">Inloggning</h3>
+
+<p><img
+src="https://github.com/itggot-markus-moen/slutprojektvt19webbserver/blob/master/misc/login.JPG">
+Man kan skriva in ett användarnamn och ett löseond och välja om man vill
+logga in eller om man vill göra ett konto. Om man väljer att göra ett konto
+så kontrollerar servern att användarnamnet är unikt och om det är det så
+läggs uppgifterna in i databasen. Om man väljer att logga in kontrollerar
+servern att lösenordet stämmer med användarnamnet. Om det inte stämmer så
+får man ett felmeddelande. Om det stämmer så loggas man in och skickas
+vidare till hemsidan.</p>
+
+<h3 id="label-Karakt-C3-A4rslistning">Karaktärslistning</h3>
+
+<p>Alla karaktärer kan listas upp och de är sorterade i de som personen som är
+inloggad äger och de som personen inte äger.</p>
+
+<h3 id="label-Skapa+en+karakt-C3-A4r">Skapa en karaktär</h3>
+
+<p><img
+src="https://github.com/itggot-markus-moen/slutprojektvt19webbserver/blob/master/misc/skapande.JPG">
+Man kan slumpa karaktärer. Man skriver in ett namn och resten får man
+slumpat. Denna karaktär listat bland alla andra karaktärer. När karaktären
+är skapad så kan man även välja att slumpa om den. Den har då samma namn
+men resten slumpas om.</p>
+
+<h3 id="label-Visa+karakt-C3-A4r">Visa karaktär</h3>
+
+<p>Man kan gå in på alla karaktärer, även de som man inte äger, och se mer
+detaljer om dem.</p>
+
+<h3 id="label-Radera+karakt-C3-A4r">Radera karaktär</h3>
+
+<p>Om man har äganderätt så kan man radera en karaktär.</p>
+
+<h3 id="label-Dela+karakt-C3-A4r">Dela karaktär</h3>
+
+<p>Om man har äganderätt så kan man dela en karaktär med en annan användare.
+De kan då också slumpa om och radera karaktären.</p>
+
+<h2 id="label-4.+Arkitektur+-28Beskriv+filer+och+mappar-29">4. Arkitektur (Beskriv filer och mappar)</h2>
+
+<p>db - mappen för databasen  db.db - själva databasen.</p>
+
+<p>misc - i den här mappen liger sådant som är relevant för projektet men som
+inte används av koden på något sätt, främst bilder på diagram och liknande.</p>
+
+<p>public - mappen där filer som skulle vara tillgängliga till alla besökare
+på sidan skulle ligga. Just nu fyller den ingen funktion, men om css skulle
+läggas till så skulle det vara här.</p>
+
+<p>views - det här är mappen för alla slim-filer.  home.slim - det här är
+filen för hemsidan, där där man kommer när man har loggat in.  index.slim -
+detta är filen för sidan som man kommer till först. Den används för
+inloggningssystemet.  layout.slim - filen med layouten för sidan. 
+view.slim - detta är sidan där man får se en karaktär i detalj.</p>
+
+<p>Controller.rb - filen med alla routes.</p>
+
+<p>model.rb - det här är filen som används för funktioner, som främst
+kommunicerar med databasen.</p>
+
+<h2 id="label-5.+-28Databas+med+ER-diagram-29">5. (Databas med ER-diagram)</h2>
+
+<p>Classes - Listar alla klasser.  Subclasses - Listar alla subclasser och
+klassen som de tillhör.  Races - Listar alla raser.  Subraces - Listar alla
+subraser och raserna som de tillhör.  Backgrounds - Listar alla bakgrunder.
+Users - Innehåller användarnamn och krypterade lösenord.  Characters -
+Listar karaktärers namn, klass, subklass, ras, subras, bakgrund, och
+ability scores.  Ownership - Används för “många till många”-relationen av
+användare och karaktärer. <img
+src="https://github.com/itggot-markus-moen/slutprojektvt19webbserver/blob/master/misc/er.JPG"></p>
+</div></div>
+
+      <div id="footer">
+  Generated on Thu May  9 10:47:30 2019 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.19 (ruby-2.4.2).
+</div>
+
+    </div>
+  </body>
+</html>
