@@ -1,6 +1,8 @@
 require "sinatra"
 require "slim"
+require "sqlite3"
 require "bcrypt"
+require 'byebug'
 require_relative "model.rb"
 
 enable :sessions
@@ -42,16 +44,12 @@ post('/login') do
     session[:account][:login] = login(username, password)
    
     if session[:account][:login]["Success"]
-        if BCrypt::Password.new(session[:account][:login]["Password"]) == password
-            session[:account]["logged_in"] = true
-            redirect("/home")
-        else
-            session[:account]["logged_in"] = false
-        end
+        session[:account]["logged_in"] = true
+        redirect("/home")
     else
         session[:account]["logged_in"] = false
+        redirect("/")
     end
-    redirect("/")
 end
 
 # Creates a new account and updates the session

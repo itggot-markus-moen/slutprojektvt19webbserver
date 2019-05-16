@@ -1,8 +1,3 @@
-require "sqlite3"
-require "bcrypt"
-require 'byebug'
-
-
 module Model
     # Attempts to log in a user
     #
@@ -27,7 +22,15 @@ module Model
             success = false
         end
 
-        return {"User_Id" => user_id, "Password" => password_db, "Success" => success}
+        if success
+            if BCrypt::Password.new(password_db) == password
+                success = true
+            else 
+                success = false
+            end
+        end
+
+        return {"User_Id" => user_id, "Success" => success}
     end
 
     # Creates a new account
